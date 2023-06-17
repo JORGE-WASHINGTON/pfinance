@@ -3,10 +3,9 @@ package com.pfinance.demo.Controllers;
 import com.pfinance.demo.Entities.Account;
 import com.pfinance.demo.Repositories.AccountRepository;
 import com.pfinance.demo.Services.AccountService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class AccountController {
@@ -20,9 +19,19 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+    @GetMapping("/accounts")
+    List<Account> getAccounts() {
+        return accountRepository.findAll();
+    }
+
     @PostMapping("/accounts")
     Account createAccount(@RequestBody Account newAccount) {
         return accountService.createAccount(newAccount);
+    }
+
+    @DeleteMapping("/accounts/{id}")
+    void deleteAccount(@PathVariable Integer id) {
+        accountService.deleteAccount(id);
     }
 
 

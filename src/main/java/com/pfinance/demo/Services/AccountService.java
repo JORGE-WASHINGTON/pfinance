@@ -16,4 +16,8 @@ public class AccountService {
     public Account createAccount(Account newAccount) {
         return accountRepository.save(newAccount);
     }
+
+    public void deleteAccount(Integer id) {
+        accountRepository.deleteById(id);
+    }
 }
