@@ -17,11 +17,9 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactions;
 
-    public Account(Integer id, BigDecimal balance, String title, List<Transaction> transactions) {
-        this.id = id;
+    public Account( BigDecimal balance, String title) {
         this.balance = balance;
         this.title = title;
-        this.transactions = transactions;
     }
 
     @Override
