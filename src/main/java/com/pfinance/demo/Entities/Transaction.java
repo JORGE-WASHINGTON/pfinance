@@ -49,6 +49,20 @@ public class Transaction {
         PAYCHECK
     }
 
+    protected Transaction() {
+
+    }
+
+    public Transaction(Account account, BigDecimal amount, String merchant, TransactionType type, Category category, LocalDate date, String description) {
+        this.account = account;
+        this.amount = amount;
+        this.merchant = merchant;
+        this.type = type;
+        this.category = category;
+        this.date = date;
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Transaction{" +
