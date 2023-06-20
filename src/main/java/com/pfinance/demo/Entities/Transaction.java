@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 
 @Entity
@@ -91,7 +92,7 @@ public class Transaction {
         if (type != that.type) return false;
         if (category != that.category) return false;
         if (!date.equals(that.date)) return false;
-        return description.equals(that.description);
+        return Objects.equals(description, that.description);
     }
 
     @Override
