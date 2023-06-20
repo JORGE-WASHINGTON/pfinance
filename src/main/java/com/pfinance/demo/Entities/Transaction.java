@@ -15,6 +15,7 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "account_id")
+    @Column(nullable = false)
     private Account account;
 
     @Column(nullable = false)

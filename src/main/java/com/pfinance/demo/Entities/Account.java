@@ -11,7 +11,9 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false)
     private BigDecimal balance;
+    @Column(nullable = false)
     private String title;
 
     @OneToMany(mappedBy = "account")
