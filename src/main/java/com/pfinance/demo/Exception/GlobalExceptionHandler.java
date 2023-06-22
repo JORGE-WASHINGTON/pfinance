@@ -1,5 +1,6 @@
 package com.pfinance.demo.Exception;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.PropertyValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,14 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
+                .body(errorMessage);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex) {
+        String errorMessage = ex.getMessage();
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
                 .body(errorMessage);
     }
 
