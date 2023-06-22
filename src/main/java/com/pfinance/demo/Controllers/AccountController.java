@@ -1,8 +1,11 @@
 package com.pfinance.demo.Controllers;
 
+import com.pfinance.demo.DTO.CreateAccountRequestDTO;
 import com.pfinance.demo.Entities.Account;
 import com.pfinance.demo.Repositories.AccountRepository;
 import com.pfinance.demo.Services.AccountService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,20 +22,17 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping("/accounts")
+    @GetMapping("/{userId}/accounts")
     List<Account> getAccounts() {
         return accountRepository.findAll();
     }
 
-    @PostMapping("/accounts")
-    Account createAccount(@RequestBody Account newAccount) {
-        return accountService.createAccount(newAccount);
+    @PostMapping("/{userId}/accounts")
+    ResponseEntity<Account> createAccount(@PathVariable Long userId, @RequestBody @Valid CreateAccountRequestDTO createAccountRequestDTO) {
+        Account createdAccount = accountService.createAccount(userId, createAccountRequestDTO);
+        return ResponseEntity.ok().body(createdAccount);
     }
 
-    @DeleteMapping("/accounts/{id}")
-    void deleteAccount(@PathVariable Integer id) {
-        accountService.deleteAccount(id);
-    }
 
 
 }
