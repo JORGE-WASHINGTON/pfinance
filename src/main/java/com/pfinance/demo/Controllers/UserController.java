@@ -1,7 +1,10 @@
 package com.pfinance.demo.Controllers;
 
+import com.pfinance.demo.DTO.CreateUserRequestDTO;
 import com.pfinance.demo.Entities.User;
 import com.pfinance.demo.Services.UserService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +27,8 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    User createUser(@RequestBody User newUser){
-        return userService.createUser(newUser);
+    ResponseEntity<User> createUser(@Valid @RequestBody CreateUserRequestDTO createUserRequestDTO){
+        User createdUser = userService.createUser(createUserRequestDTO);
+        return ResponseEntity.ok().body(createdUser);
     }
 }
